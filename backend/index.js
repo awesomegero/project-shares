@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const register = require("./routes/register");
+const login = require("./routes/login");
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ mongoose.connect(mongoUri)
     });
 
 app.post("/register", register);
+app.post("/login", login);
 
 app.listen(port, () => {
     console.log(`Project Shares backend server listening on ${port}`);

@@ -8,7 +8,9 @@ const register = async (req, res) => {
     const password = req.body.password;
 
     if(!username || !password) {
-        res.status(400).end();
+        res.status(400).json({
+            userMessage: "Bitte gebe einen Nutzernamen und ein Passwort an.",
+        }).end();
         return;
     }
 
@@ -35,7 +37,7 @@ const register = async (req, res) => {
                 return;
             }
 
-            jwt.sign({ username }, jwtSecret, {}, (err, token) => {
+            jwt.sign({ username }, jwtSecret, { expiresIn: "3d" }, (err, token) => {
                 if(err) {
                     console.log(err);
 
