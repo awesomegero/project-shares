@@ -11,14 +11,15 @@ const verify = async (req, res, next) => {
         return;
     }
 
-    jwt.verify(token, jwtSecret, (err) => {
+    jwt.verify(token, jwtSecret, (err, user) => {
         if(err) {
             res.status(403).json({
-                userMessage: "Dein Token ist abgelaufen.",
+                userMessage: "Dein Token ist falsch oder abgelaufen.",
             }).end();
             return;
         }
 
+        req.body.username = user.username;
         next();
     });
 };

@@ -1,0 +1,10 @@
+POST http://localhost:3000/trade/buy
+Content-Type: application/json
+Authorization: Bearer INVALID_TOKEN
+
+{
+  "shareID": "BMWYY",
+  "amount": 100
+}
+
+###
