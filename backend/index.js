@@ -9,12 +9,16 @@ const dotenv = require("dotenv");
 const register = require("./routes/register");
 const login = require("./routes/login");
 
+const stockPriceUpdater = require("./updater/update");
+
 dotenv.config();
 
 const port = process.env.API_PORT || 3000;
 const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017";
 const app = express();
+const tradeRouter = express.Router();
 app.use(bodyParser.json());
+app.use("/trade", tradeRouter);
 
 mongoose.connect(mongoUri)
     .then(() => {
