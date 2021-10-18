@@ -6,6 +6,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const verify = require("./routes/trade/verify");
 const register = require("./routes/register");
 const login = require("./routes/login");
 
@@ -25,6 +26,7 @@ mongoose.connect(mongoUri)
         console.log(`Project Shares backend database connected`);
     });
 
+tradeRouter.use(verify);
 app.post("/register", register);
 app.post("/login", login);
 

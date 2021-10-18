@@ -1,0 +1,7 @@
+POST http://localhost:3000/trade
+Content-Type: application/json
+Authorization: Bearer INVALID_TOKEN
+
+{}
+
+###
