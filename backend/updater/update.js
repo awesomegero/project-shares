@@ -11,6 +11,8 @@ const stockPriceUpdater = setInterval(async () => {
 }, 1000 * 60 * 5);
 
 const updateStockPrice = async () => {
+    console.log("Updating stock prices");
+
     stocks.forEach((stock) => {
         yahooStockPrices.getCurrentPrice(stock.shareID, (err, price) => {
             if(err) {
@@ -21,7 +23,8 @@ const updateStockPrice = async () => {
             Share.findOneAndUpdate({
                 shareID: stock.shareID,
                 shareName: stock.shareName
-            }, { sharePrice: price }, { upsert: true });
+            }, { sharePrice: price }, { upsert: true }, () => {
+            });
         });
     });
 };

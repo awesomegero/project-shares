@@ -1,10 +1,11 @@
-POST http://localhost:3000/trade/buy
+POST http://localhost:3000/trade/sell
 Content-Type: application/json
 Authorization: Bearer INVALID_TOKEN
 
 {
   "shareID": "AAPL",
-  "amount": 100
+  "buyTime": 1634635784039,
+  "amount": 20
 }
 
 ###

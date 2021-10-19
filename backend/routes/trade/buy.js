@@ -3,14 +3,16 @@ const Share = require("../../models/share");
 
 const buy = async (req, res) => {
     const shareID = req.body.shareID;
-    const amount = req.body.amount;
+    const rawAmount = req.body.amount;
 
-    if(!shareID || !amount) {
+    if(!shareID || !rawAmount) {
         res.status(400).json({
             userMessage: "Bitte gebe die ID der gewünschten Aktie und die Anzahl an.",
         }).end();
         return;
     }
+
+    const amount = parseInt(rawAmount, 10);
 
     User.findOne({ username: req.body.username }, (err, user) => {
         if(err) {
@@ -53,7 +55,8 @@ const buy = async (req, res) => {
             const userShareObject = {
                 buyTime: Date.now(),
                 buyPrice: shareObject.sharePrice,
-                shareID: shareObject.shareID
+                shareID: shareObject.shareID,
+                shareAmount: amount,
             };
             const newMoneyBalance = user.moneyBalance - orderCost;
 

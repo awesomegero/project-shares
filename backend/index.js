@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const verify = require("./routes/trade/verify");
 const buy = require("./routes/trade/buy");
+const sell = require("./routes/trade/sell");
 const register = require("./routes/register");
 const login = require("./routes/login");
 
@@ -29,6 +30,7 @@ mongoose.connect(mongoUri)
 
 tradeRouter.use(verify);
 tradeRouter.post("/buy", buy);
+tradeRouter.post("/sell", sell);
 
 app.post("/register", register);
 app.post("/login", login);
