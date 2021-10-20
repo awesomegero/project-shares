@@ -2,14 +2,14 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../../index");
 
 const verify = async (req, res, next) => {
-    const token = req.headers.authorization.split(" ")[1];
-
-    if(!token) {
+    if(!req.headers.authorization) {
         res.status(401).json({
             userMessage: "Du bist nicht eingeloggt.",
         }).end();
         return;
     }
+
+    const token = req.headers.authorization.split(" ")[1];
 
     jwt.verify(token, jwtSecret, (err, user) => {
         if(err) {
